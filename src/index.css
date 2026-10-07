@@ -1,5 +1,74 @@
 @import "tailwindcss";
 
+@theme {
+  /* Фон страницы */
+  --color-page-bg: #f5f5f5;
+
+  /* Сетка расписания */
+  --color-schedule-grid: #e0e0e0;
+  --color-schedule-cell: #ffffff;
+  --color-schedule-cell-hover: #f8f9fa;
+  --color-schedule-head-time: #2c3e50;
+  --color-schedule-head-day: #34495e;
+  --color-schedule-time-bg: #ecf0f1;
+  --color-schedule-time-text: #7f8c8d;
+  --color-schedule-time-border: #bdc3c7;
+  --color-schedule-weekend-bg: #f8f9fa;
+  --color-schedule-today-bg: #dbeafe;
+  --color-schedule-today-text: #1e3a8a;
+
+  /* Предметы */
+  --color-subject-math: #e74c3c;
+  --color-subject-science: #2ecc71;
+  --color-subject-english: #f39c12;
+  --color-subject-history: #9b59b6;
+  --color-subject-art: #1abc9c;
+  --color-subject-default: #3498db;
+
+  /* Состояния слотов */
+  --color-slot-free-bg: #bbf7d0;
+  --color-slot-free-bg-hover: #86efac;
+  --color-slot-off-bg: #f3f4f6;
+
+  /* Уроки */
+  --color-lesson-mine-bg: #fca5a5;
+  --color-lesson-mine-bg-hover: #f87171;
+  --color-lesson-mine-text: #7f1d1d;
+  --color-lesson-other-bg: #d1d5db;
+  --color-lesson-other-text: #374151;
+
+  --color-toolbar-bg: #ffffff;
+  --color-toolbar-border: #e5e7eb;
+  --color-text-primary: #111827;
+  --color-text-muted: #6b7280;
+
+  /* Размеры сетки */
+  --spacing-slot: 30px;
+  --spacing-head: 40px;
+  --spacing-time-col: 80px;
+  --spacing-day-col-min: 120px;
+}
+
+@theme {
+  --font-size-title: 20px;
+  --font-size-time: 9px;      
+  --font-size-lesson: 10px;   
+  --font-size-day: 12px;     
+  --font-size-title: 18px;
+  --font-size-button: 12px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --font-size-title: 18px;
+    --font-size-time: 10px;
+    --font-size-lesson: 12px;
+    --font-size-day: 14px;
+    --font-size-title: 20px;
+    --font-size-button: 14px;
+  }
+}
+
 *,
 *::before,
 *::after {
@@ -17,7 +86,7 @@ body,
 
 body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background-color: #f9fafb;
+  background-color: var(--color-page-bg);
   color: #111827;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -27,7 +96,7 @@ button,
 input,
 select,
 textarea {
-  font: inherit;
+  font-family: inherit;
   color: inherit;
 }
 

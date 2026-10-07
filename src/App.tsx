@@ -25,9 +25,11 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <CalendarHeader />
-      <Calendar {...calendarProps} />
+    <div className="min-h-screen bg-page-bg p-5">
+      <main className="mx-auto rounded-lg bg-schedule-cell p-5 shadow-md overflow-x-auto">
+        <CalendarHeader />
+        <Calendar {...calendarProps} />
+      </main>
     </div>
   );
 }

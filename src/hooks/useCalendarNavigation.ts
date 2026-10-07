@@ -1,12 +1,17 @@
-import { useCallback, useState } from 'react';
-import { addDays, startOfDay } from '../utils/time';
-import { DAYS_BY_VIEW } from '../utils/view';
+import { useCallback, useState, useEffect } from 'react';
+import { addDays } from '../utils/time';
+import { DAYS_BY_VIEW, getStartOfView } from '../utils/view';
 import type { View } from '../types';
 
 export function useCalendarNavigation(view: View, initialDate: Date = new Date()) {
   const [startDate, setStartDate] = useState<Date>(() =>
-    startOfDay(initialDate),
+    getStartOfView(view, initialDate),
   );
+
+  // При смене вида подтягиваем начало к правилу вида.
+  useEffect(() => {
+    setStartDate((current) => getStartOfView(view, current));
+  }, [view]);
 
   const shift = useCallback(
     (direction: -1 | 1) => {
@@ -17,8 +22,8 @@ export function useCalendarNavigation(view: View, initialDate: Date = new Date()
   );
 
   const goToToday = useCallback(() => {
-    setStartDate(startOfDay(new Date()));
-  }, []);
+    setStartDate(getStartOfView(view, new Date()));
+  }, [view]);
 
   return { startDate, setStartDate, shift, goToToday };
 }

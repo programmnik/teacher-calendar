@@ -12,6 +12,15 @@ export function startOfDay(date: Date): Date {
   return d;
 }
 
+/** Возвращает понедельник недели, в которую входит дата. */
+export function startOfWeek(date: Date): Date {
+  const d = startOfDay(date);
+  const day = d.getDay(); // 0 — Sunday, 1 — Monday, ..., 6 — Saturday
+  const diff = day === 0 ? -6 : 1 - day;
+  d.setDate(d.getDate() + diff);
+  return d;
+}
+
 /** Прибавляет к дате N дней, не мутируя исходную. */
 export function addDays(date: Date, days: number): Date {
   const d = new Date(date);

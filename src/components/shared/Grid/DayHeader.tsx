@@ -7,14 +7,14 @@ type Props = {
 
 function DayHeader({ date, column, isToday, isWeekend }: Props) {
   const styles = isToday
-    ? 'bg-blue-100 text-blue-900'
+    ? 'bg-schedule-today-bg text-schedule-today-text'
     : isWeekend
-    ? 'bg-gray-50 text-gray-500'
-    : 'bg-white';
+    ? 'bg-schedule-head-day text-white/80'
+    : 'bg-schedule-head-day text-white';
 
   return (
     <div
-      className={`flex items-center justify-center border-b border-r px-2 py-1 text-xs font-medium ${styles}`}
+      className={`flex items-center justify-center border-b border-r border-schedule-time-border px-2 py-1 text-(length:--font-size-day) font-bold ${styles}`}
       style={{ gridColumn: column, gridRow: 1 }}
     >
       {date.toLocaleDateString('en-US', {

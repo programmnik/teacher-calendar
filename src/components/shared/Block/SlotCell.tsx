@@ -7,12 +7,12 @@ type Props = {
 
 function SlotCell({ gridColumn, gridRow, isFree, onClick }: Props) {
   const styles = isFree
-    ? 'bg-green-200 hover:bg-green-300 cursor-pointer'
-    : 'bg-gray-100';
+    ? 'bg-slot-free-bg hover:bg-slot-free-bg-hover cursor-pointer'
+    : 'bg-schedule-cell';
 
   return (
     <div
-      className={`border-b border-r border-gray-100 ${styles}`}
+      className={`border-b border-r border-schedule-cell-hover ${styles}`}
       style={{ gridColumn, gridRow }}
       onClick={isFree ? onClick : undefined}
     />

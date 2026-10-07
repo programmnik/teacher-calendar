@@ -13,13 +13,13 @@ function Calendar({ onPrev, onNext, onToday, ...gridProps }: CalendarProps) {
   };
 
   return (
-    <div className="rounded-lg border bg-white shadow-sm">
+    <>
       <CalendarToolbar {...toolbarProps} />
       
       <div className="overflow-x-auto">
         <CalendarGrid {...gridProps} />
       </div>
-    </div>
+    </>
   );
 }
 

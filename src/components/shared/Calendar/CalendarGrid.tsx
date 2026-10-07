@@ -8,9 +8,13 @@ import DayColumn from '../Column/DayColumn';
 import DayHeader from '../Grid/DayHeader';
 import LessonMenu from '../LessonMenu/LessonMenu';
 
-function CalendarGrid(props: CalendarGridProps) {
-  const { view, startDate, schedule, lessons, onSlotSelect } = props;
-
+function CalendarGrid({
+  view,
+  startDate,
+  schedule,
+  lessons,
+  onSlotSelect,
+}: CalendarGridProps) {
   const daysCount = DAYS_BY_VIEW[view];
   const days = buildCalendar(startDate, daysCount, schedule, lessons, SLOT_MINUTES);
 
@@ -22,10 +26,10 @@ function CalendarGrid(props: CalendarGridProps) {
   return (
     <>
       <div
-        className="grid border-l border-t"
+        className="grid overflow-hidden rounded bg-schedule-grid gap-px"
         style={{
-          gridTemplateColumns: `80px repeat(${daysCount}, minmax(120px, 1fr))`,
-          gridTemplateRows: `40px repeat(${getSlotsPerDay()}, 30px)`,
+          gridTemplateColumns: `var(--spacing-time-col) repeat(${daysCount}, minmax(var(--spacing-day-col-min), 1fr))`,
+          gridTemplateRows: `var(--spacing-head) repeat(${getSlotsPerDay(SLOT_MINUTES)}, var(--spacing-slot))`,
         }}
       >
         <TimeColumn date={startDate} slotMinutes={SLOT_MINUTES} />
