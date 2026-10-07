@@ -1,51 +1,33 @@
-import { useState } from 'react';
-import Calendar from './components/Calendar/Calendar';
-import type { View } from './types';
+import Calendar from './components/shared/Calendar/Calendar';
+import CalendarHeader from './components/shared/Calendar/CalendarHeader';
+import { demoLessons, demoStartDate, demoSchedule } from './data/demo';
+import { useCalendarNavigation } from './hooks/useCalendarNavigation';
+import { useResponsiveView } from './hooks/useResponsiveView';
 
 function App() {
-  const [view, setView] = useState<View>('week');
-  const [startDate, _] = useState<Date>(() => {
-    const d = new Date();
-    d.setHours(0, 0, 0, 0);
-    return d;
-  });
+  const view = useResponsiveView();
+  const { startDate, shift, goToToday } = useCalendarNavigation(
+    view,
+    demoStartDate,
+  );
+
+  const calendarProps = {
+    view,
+    startDate,
+    schedule: demoSchedule,
+    lessons: demoLessons,
+    onPrev: () => shift(-1),
+    onNext: () => shift(1),
+    onToday: goToToday,
+    onSlotSelect: (slot: { startTime: Date; endTime: Date }) => {
+      alert(`Slot: ${slot.startTime.toLocaleString()}`);
+    },
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 p-4">
-      <header className="mb-4 flex items-center justify-between">
-        <h1 className="text-xl font-semibold">Teacher Calendar</h1>
-
-        <div className="flex items-center gap-2">
-          <button
-            className="rounded border px-3 py-1 hover:bg-gray-100"
-            onClick={() => setView('day')}
-          >
-            Day
-          </button>
-          <button
-            className="rounded border px-3 py-1 hover:bg-gray-100"
-            onClick={() => setView('3days')}
-          >
-            3 days
-          </button>
-          <button
-            className="rounded border px-3 py-1 hover:bg-gray-100"
-            onClick={() => setView('week')}
-          >
-            Week
-          </button>
-        </div>
-      </header>
-
-      <Calendar
-        view={view}
-        startDate={startDate}
-        schedule={[]}
-        lessons={[]}
-        onSlotSelect={(slot) => {
-          console.log('slot selected:', slot);
-        }}
-      />
+      <CalendarHeader />
+      <Calendar {...calendarProps} />
     </div>
   );
 }
